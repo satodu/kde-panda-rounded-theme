@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3" height="3" version="1">
+<defs id="rounded">
+    <style type="text/css" id="current-color-scheme">
+        .ColorScheme-Text { color:#232629; }
+        .ColorScheme-NegativeText { color:#da4453; }
+        .ColorScheme-Highlight { color:#3daee9; }
+        .ColorScheme-Background { color:#fcfcfc; }
+        .ColorScheme-ButtonBackground { color:#e8eaed; }
+    </style>
+</defs>
+ <rect id="hint-glow-radius" style="opacity:1;fill:#ff0000" width="1" height="1" x="0" y="0"/>
+ <rect id="hint-stretch-borders" style="opacity:1;fill:#ff0000" width="1" height="1" x="0" y="1"/>
+ <rect id="center" style="opacity:0.001;fill:none" width="3" height="3" x="0" y="0"/>
+ <rect id="topright" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="topleft" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="top" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="right" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="bottomright" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="bottom" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="left" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+ <rect id="bottomleft" style="opacity:0.001;fill:none" width="1" height="1" x="0" y="0"/>
+</svg>

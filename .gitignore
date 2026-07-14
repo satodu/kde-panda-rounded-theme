@@ -1,0 +1,4 @@
+*.kcache
+*~
+.DS_Store
+*.swp

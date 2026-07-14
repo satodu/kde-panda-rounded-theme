@@ -1,25 +1,55 @@
 # Panda Rounded Theme
 
-A dark, sleek, and modern desktop theme with rounded corners for the KDE Plasma desktop environment.
+Pacote completo (escuro + claro) para KDE Plasma 6:
 
-This theme has been customized to provide consistent rounded corners across all widgets, popups, dialogs, and system panels, ensuring a fluid and integrated visual experience.
+| Componente | Escuro | Claro |
+|------------|--------|-------|
+| Plasma Style | `Panda-theme` | `Panda-theme-light` |
+| Cores | `Panda Color` | `Panda Light` |
+| Kvantum | `Panda` | `PandaLight` |
+| Global Theme | `Panda Rounded` | `Panda Rounded Light` |
 
-## 🚀 Installation
+Ícones **Reversal** não entram neste repositório (são de terceiros). Instale à parte na KDE Store / Store.
 
-To install this theme manually for your user:
+## Estrutura
 
-1. Clone this repository into your Plasma desktop theme directory:
-   ```bash
-   git clone https://github.com/satodu/kde-panda-rounded-theme.git ~/.local/share/plasma/desktoptheme/Panda-Rounded-Theme
-   ```
-2. Open **System Settings** -> **Appearance** -> **Plasma Style**.
-3. Select **Panda Rounded Theme** and click **Apply**.
+```
+plasma/desktoptheme/     # Estilos Plasma
+color-schemes/           # Esquemas de cores KDE
+kvantum/                 # Temas Kvantum (apps Qt)
+look-and-feel/           # Temas globais
+install.sh               # Instala tudo no usuário
+scripts/sync-from-system.sh  # Atualiza o repo a partir do sistema
+```
 
----
+## Instalação (nova máquina)
 
-## 🤝 Credits & Acknowledgements
+```bash
+git clone git@github.com:satodu/kde-panda-rounded-theme.git
+cd kde-panda-rounded-theme
+./install.sh          # dark + light (Kvantum padrão = Panda escuro)
+# ou: ./install.sh dark
+# ou: ./install.sh light
+```
 
-This theme was built and customized based on the excellent work of the KDE community. Special thanks to:
+Depois em **Configurações do Sistema → Aparência**:
 
-* **Alexey Varfolomeev** — Creator of the original **Rounded** theme (Plasma 5 Theme), which served as the base and inspiration for this project.
-  * Original repository: [github.com/varlesh/rounded](https://github.com/varlesh/rounded)
+1. Temas Globais → **Panda Rounded** ou **Panda Rounded Light**
+2. (Opcional) Estilo de aplicativo → **Kvantum** se ainda não estiver
+3. Ícones → **Reversal-purple** (ou outra variante Reversal)
+
+## Backup / sincronizar do sistema para o git
+
+Se você editar os temas instalados:
+
+```bash
+./scripts/sync-from-system.sh
+git add -A && git status
+git commit -m "..."
+git push
+```
+
+## Créditos
+
+- Tema baseado em **Rounded** (Alexey Varfolomeev)
+- Ícones recomendados: **Reversal** (autor original na KDE Store — não incluso)

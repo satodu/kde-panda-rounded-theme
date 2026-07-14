@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "sato.du@gmail.com",
+                "Name": "Panda"
+            }
+        ],
+        "Category": "Global Themes (Plasma 6)",
+        "Description": "Panda Rounded — tema global escuro (Plasma Style + cores). Kvantum: Panda. Ícones: Reversal (instalar à parte).",
+        "Id": "com.github.satodu.panda.desktop",
+        "License": "GPLv3",
+        "Name": "Panda Rounded",
+        "Version": "20260714",
+        "Website": "https://github.com/satodu/kde-panda-rounded-theme"
+    },
+    "X-Plasma-APIVersion": "2",
+    "Keywords": "Dark;Rounded;Panda"
+}

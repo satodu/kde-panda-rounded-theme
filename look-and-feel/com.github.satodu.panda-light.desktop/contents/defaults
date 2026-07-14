@@ -1,0 +1,18 @@
+[kdeglobals][KDE]
+widgetStyle=kvantum
+
+[kdeglobals][General]
+ColorScheme=Panda Light
+
+[kdeglobals][Icons]
+Theme=Reversal-purple
+
+[plasmarc][Theme]
+name=Panda-theme-light
+
+[kcminputrc][Mouse]
+cursorTheme=breeze_cursors
+
+[kwinrc][org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
