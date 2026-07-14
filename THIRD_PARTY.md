@@ -1,19 +1,19 @@
-# Dependências de terceiros (não versionadas)
+# Third-party dependencies (not versioned)
 
 ## Reversal Icons
 
-Usado junto com o Panda Rounded, mas **não faz parte deste repositório**.
+Used together with Panda Rounded, but **not part of this repository**.
 
-- Nome típico instalado: `Reversal-purple` / `Reversal-purple-dark`
-- Fonte: KDE Store / repositório do autor do Reversal
-- Após instalar o Panda com `./install.sh`, escolha os ícones em Aparência → Ícones
+- Typical installed names: `Reversal-purple` / `Reversal-purple-dark`
+- Source: KDE Store / Reversal author's repository
+- After installing Panda with `./install.sh`, pick the icons in Appearance → Icons
 
-Não redistribuímos o Reversal aqui para respeitar a licença/autoria de terceiros.
+We do not redistribute Reversal here out of respect for third-party licensing/authorship.
 
 ## Klassy (window decoration)
 
-Plugin de decoração / estilo ([paulmcauley/klassy](https://github.com/paulmcauley/klassy)).
+Decoration / style plugin ([paulmcauley/klassy](https://github.com/paulmcauley/klassy)).
 
-- Pacote típico: AUR `klassy-bin`
-- Este repo só versiona **a tua** `klassyrc` (preferências)
-- Ícones `klassy` / `klassy-dark` e presets bundled vêm com o pacote — não redistribuímos
+- Typical package: AUR `klassy-bin`
+- This repo only versions **your** `klassyrc` (preferences)
+- `klassy` / `klassy-dark` icons and bundled presets come with the package — we do not redistribute them
