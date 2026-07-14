@@ -19,4 +19,9 @@ cp "$HOME/.local/share/color-schemes/Panda Light.colors" \
 rsync -a --delete "$HOME/.config/Kvantum/Panda/" "$ROOT/kvantum/Panda/" || true
 rsync -a --delete "$HOME/.config/Kvantum/PandaLight/" "$ROOT/kvantum/PandaLight/" || true
 
+# Klassy: só a config do usuário (presets oficiais ficam no pacote)
+if [[ -f "$HOME/.config/klassy/klassyrc" ]]; then
+  sed '/^LookAndFeelSet=/d' "$HOME/.config/klassy/klassyrc" > "$ROOT/klassy/klassyrc"
+fi
+
 echo "Repo atualizado a partir do sistema: $ROOT"

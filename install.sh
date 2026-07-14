@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Instala Panda Rounded (Plasma + cores + Kvantum + Look-and-Feel) no usuário atual.
+# Instala Panda Rounded (Plasma + cores + Kvantum + Look-and-Feel + Klassy) no usuário atual.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -47,6 +47,16 @@ install_light() {
     "$HOME/.local/share/plasma/look-and-feel/com.github.satodu.panda-light.desktop/"
 }
 
+install_klassy() {
+  echo "→ Klassy (config da decoração)"
+  if [[ ! -e /usr/lib/qt6/plugins/org.kde.kdecoration2/org.kde.klassy.so ]] \
+     && [[ ! -e /usr/lib/qt/plugins/org.kde.kdecoration2/org.kde.klassy.so ]]; then
+    echo "  ⚠ Klassy não detectado. Instale antes (ex.: AUR klassy-bin)."
+  fi
+  mkdir -p "$HOME/.config/klassy"
+  cp "$ROOT/klassy/klassyrc" "$HOME/.config/klassy/klassyrc"
+}
+
 set_kvantum() {
   local theme="$1"
   mkdir -p "$HOME/.config/Kvantum"
@@ -57,15 +67,18 @@ set_kvantum() {
 case "$MODE" in
   dark)
     install_dark
+    install_klassy
     set_kvantum Panda
     ;;
   light)
     install_light
+    install_klassy
     set_kvantum PandaLight
     ;;
   both)
     install_dark
     install_light
+    install_klassy
     set_kvantum Panda
     ;;
   *)
@@ -77,6 +90,6 @@ esac
 echo
 echo "Pronto. Próximos passos manuais:"
 echo "  1. Configurações → Aparência → Temas Globais → Panda Rounded (ou Light)"
-echo "     (ou aplique Plasma Style + Cores + Estilo de aplicativo = Kvantum)"
-echo "  2. Ícones: instale Reversal (não vem neste repo) — ex. Reversal-purple"
-echo "  3. plasmashell --replace &   # se necessário"
+echo "  2. Klassy instalado (AUR: klassy-bin) — Decoração de janelas = Klassy"
+echo "  3. Ícones: Reversal (não vem neste repo) — ex. Reversal-purple"
+echo "  4. plasmashell --replace &   # se necessário"
