@@ -57,6 +57,14 @@ install_klassy() {
   cp "$ROOT/klassy/klassyrc" "$HOME/.config/klassy/klassyrc"
 }
 
+install_panel_colorizer() {
+  if [[ -d "$ROOT/panel-colorizer" ]]; then
+    echo "→ Panel Colorizer (presets e configs)"
+    mkdir -p "$HOME/.config/panel-colorizer"
+    rsync -a --delete "$ROOT/panel-colorizer/" "$HOME/.config/panel-colorizer/"
+  fi
+}
+
 set_kvantum() {
   local theme="$1"
   mkdir -p "$HOME/.config/Kvantum"
@@ -68,17 +76,20 @@ case "$MODE" in
   dark)
     install_dark
     install_klassy
+    install_panel_colorizer
     set_kvantum Panda
     ;;
   light)
     install_light
     install_klassy
+    install_panel_colorizer
     set_kvantum PandaLight
     ;;
   both)
     install_dark
     install_light
     install_klassy
+    install_panel_colorizer
     set_kvantum Panda
     ;;
   *)

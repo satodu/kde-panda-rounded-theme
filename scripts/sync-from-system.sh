@@ -24,4 +24,11 @@ if [[ -f "$HOME/.config/klassy/klassyrc" ]]; then
   sed '/^LookAndFeelSet=/d' "$HOME/.config/klassy/klassyrc" > "$ROOT/klassy/klassyrc"
 fi
 
+# Panel Colorizer: presets e configurações
+if [[ -d "$HOME/.config/panel-colorizer" ]]; then
+  mkdir -p "$ROOT/panel-colorizer"
+  rsync -a --delete "$HOME/.config/panel-colorizer/" "$ROOT/panel-colorizer/" || true
+fi
+
 echo "Repo atualizado a partir do sistema: $ROOT"
+
