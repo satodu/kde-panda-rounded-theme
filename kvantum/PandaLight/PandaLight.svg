@@ -2907,12 +2907,12 @@
     <path
        inkscape:connector-curvature="0"
        style="opacity:0.5;fill:#3daee9;fill-opacity:1;fill-rule:evenodd"
-       d="m 151,314 h -6 v -6 h 6 z"
+       d="M 151,308 H 145 C 145,311.32 147.68,314 151,314 V 308 Z"
        id="menuitem-normal-bottomleft" />
     <path
        inkscape:connector-curvature="0"
        style="opacity:0.5;fill:#3daee9;fill-opacity:1;fill-rule:evenodd"
-       d="m 145,276 v -6 h 6 v 6 z"
+       d="M 151,276 H 145 C 145,272.68 147.68,270 151,270 V 276 Z"
        id="menuitem-normal-topleft" />
     <path
        inkscape:connector-curvature="0"
@@ -2937,12 +2937,12 @@
     <path
        inkscape:connector-curvature="0"
        style="opacity:0.5;fill:#3daee9;fill-opacity:1;fill-rule:evenodd"
-       d="m 183.00016,313.99992 6,8e-5 L 189,308 h -5.99984 z"
+       d="M 183,308 H 189 C 189,311.32 186.32,314 183,314 V 308 Z"
        id="menuitem-normal-bottomright" />
     <path
        inkscape:connector-curvature="0"
        style="opacity:0.5;fill:#3daee9;fill-opacity:1;fill-rule:evenodd"
-       d="m 188.99984,276.00008 1.6e-4,-5.99992 -6,-8e-5 V 276 Z"
+       d="M 183,276 H 189 C 189,272.68 186.32,270 183,270 V 276 Z"
        id="menuitem-normal-topright" />
     <g
        style="color:#000000;fill-rule:evenodd"

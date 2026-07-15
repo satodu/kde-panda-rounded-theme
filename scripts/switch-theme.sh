@@ -111,6 +111,17 @@ apply_mode() {
 
   apply_icons "$icons"
 
+  echo "→ Clearing Plasma theme cache..."
+  rm -f "$HOME/.cache/plasma-theme-"* "$HOME/.cache/plasma_theme_"* 2>/dev/null || true
+
+  echo "→ Restarting plasmashell..."
+  if systemctl --user is-active plasma-plasmashell.service >/dev/null 2>&1; then
+    systemctl --user restart plasma-plasmashell.service
+  else
+    kquitapp6 plasmashell 2>/dev/null || killall plasmashell 2>/dev/null || true
+    kstart6 plasmashell >/dev/null 2>&1 &
+  fi
+
   echo "Done. Open apps may need a restart to fully pick up Kvantum."
 }
 

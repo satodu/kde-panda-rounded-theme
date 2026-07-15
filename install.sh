@@ -99,8 +99,19 @@ case "$MODE" in
 esac
 
 echo
+echo "→ Limpando cache do tema do Plasma..."
+rm -f "$HOME/.cache/plasma-theme-"* "$HOME/.cache/plasma_theme_"* 2>/dev/null || true
+
+echo "→ Reiniciando o plasmashell..."
+if systemctl --user is-active plasma-plasmashell.service >/dev/null 2>&1; then
+  systemctl --user restart plasma-plasmashell.service
+else
+  kquitapp6 plasmashell 2>/dev/null || killall plasmashell 2>/dev/null || true
+  kstart6 plasmashell >/dev/null 2>&1 &
+fi
+
+echo
 echo "Pronto. Próximos passos manuais:"
 echo "  1. Configurações → Aparência → Temas Globais → Panda Rounded (ou Light)"
 echo "  2. Klassy instalado (AUR: klassy-bin) — Decoração de janelas = Klassy"
 echo "  3. Ícones: Reversal (não vem neste repo) — ex. Reversal-purple"
-echo "  4. plasmashell --replace &   # se necessário"
