@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Instala Panda Rounded (Plasma + cores + Kvantum + Look-and-Feel + Klassy) no usuário atual.
+# Install Panda Rounded (Plasma + colors + Kvantum + Look-and-Feel + Klassy) for the current user.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODE="${1:-both}"  # dark | light | both
 
 install_dark() {
-  echo "→ Plasma Style (escuro)"
+  echo "→ Plasma Style (dark)"
   mkdir -p "$HOME/.local/share/plasma/desktoptheme"
   rsync -a --delete "$ROOT/plasma/desktoptheme/Panda-theme/" \
     "$HOME/.local/share/plasma/desktoptheme/Panda-theme/"
 
-  echo "→ Cores (Panda Color)"
+  echo "→ Colors (Panda Color)"
   mkdir -p "$HOME/.local/share/color-schemes"
   cp "$ROOT/color-schemes/Panda-Color.colors" \
     "$HOME/.local/share/color-schemes/Panda Color.colors"
@@ -27,12 +27,12 @@ install_dark() {
 }
 
 install_light() {
-  echo "→ Plasma Style (claro)"
+  echo "→ Plasma Style (light)"
   mkdir -p "$HOME/.local/share/plasma/desktoptheme"
   rsync -a --delete "$ROOT/plasma/desktoptheme/Panda-theme-light/" \
     "$HOME/.local/share/plasma/desktoptheme/Panda-theme-light/"
 
-  echo "→ Cores (Panda Light)"
+  echo "→ Colors (Panda Light)"
   mkdir -p "$HOME/.local/share/color-schemes"
   cp "$ROOT/color-schemes/Panda-Light.colors" \
     "$HOME/.local/share/color-schemes/Panda Light.colors"
@@ -48,10 +48,10 @@ install_light() {
 }
 
 install_klassy() {
-  echo "→ Klassy (config da decoração)"
+  echo "→ Klassy (window decoration config)"
   if [[ ! -e /usr/lib/qt6/plugins/org.kde.kdecoration2/org.kde.klassy.so ]] \
      && [[ ! -e /usr/lib/qt/plugins/org.kde.kdecoration2/org.kde.klassy.so ]]; then
-    echo "  ⚠ Klassy não detectado. Instale antes (ex.: AUR klassy-bin)."
+    echo "  ⚠ Klassy not detected. Please install it first (e.g., AUR: klassy-bin)."
   fi
   mkdir -p "$HOME/.config/klassy"
   cp "$ROOT/klassy/klassyrc" "$HOME/.config/klassy/klassyrc"
@@ -59,7 +59,7 @@ install_klassy() {
 
 install_panel_colorizer() {
   if [[ -d "$ROOT/panel-colorizer" ]]; then
-    echo "→ Panel Colorizer (presets e configs)"
+    echo "→ Panel Colorizer (presets and configs)"
     mkdir -p "$HOME/.config/panel-colorizer"
     rsync -a --delete "$ROOT/panel-colorizer/" "$HOME/.config/panel-colorizer/"
   fi
@@ -69,7 +69,7 @@ set_kvantum() {
   local theme="$1"
   mkdir -p "$HOME/.config/Kvantum"
   printf '[General]\ntheme=%s\n' "$theme" > "$HOME/.config/Kvantum/kvantum.kvconfig"
-  echo "→ Kvantum ativo: $theme"
+  echo "→ Active Kvantum theme: $theme"
 }
 
 case "$MODE" in
@@ -93,16 +93,16 @@ case "$MODE" in
     set_kvantum Panda
     ;;
   *)
-    echo "Uso: $0 [dark|light|both]"
+    echo "Usage: $0 [dark|light|both]"
     exit 1
     ;;
 esac
 
 echo
-echo "→ Limpando cache do tema do Plasma..."
+echo "→ Clearing Plasma theme cache..."
 rm -f "$HOME/.cache/plasma-theme-"* "$HOME/.cache/plasma_theme_"* 2>/dev/null || true
 
-echo "→ Reiniciando o plasmashell..."
+echo "→ Restarting plasmashell..."
 if systemctl --user is-active plasma-plasmashell.service >/dev/null 2>&1; then
   systemctl --user restart plasma-plasmashell.service
 else
@@ -111,7 +111,7 @@ else
 fi
 
 echo
-echo "Pronto. Próximos passos manuais:"
-echo "  1. Configurações → Aparência → Temas Globais → Panda Rounded (ou Light)"
-echo "  2. Klassy instalado (AUR: klassy-bin) — Decoração de janelas = Klassy"
-echo "  3. Ícones: Reversal (não vem neste repo) — ex. Reversal-purple"
+echo "Done. Next manual steps:"
+echo "  1. Settings → Appearance → Global Themes → Panda Rounded (or Light)"
+echo "  2. Klassy installed (AUR: klassy-bin) — Window Decorations = Klassy"
+echo "  3. Icons: Reversal (not included in this repo) — e.g., Reversal-purple"

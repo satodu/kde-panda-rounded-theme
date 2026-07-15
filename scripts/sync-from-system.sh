@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copia o que está instalado no sistema de volta para o repositório (backup).
+# Copy what is installed on the system back to the repository (backup).
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -19,16 +19,15 @@ cp "$HOME/.local/share/color-schemes/Panda Light.colors" \
 rsync -a --delete "$HOME/.config/Kvantum/Panda/" "$ROOT/kvantum/Panda/" || true
 rsync -a --delete "$HOME/.config/Kvantum/PandaLight/" "$ROOT/kvantum/PandaLight/" || true
 
-# Klassy: só a config do usuário (presets oficiais ficam no pacote)
+# Klassy: user config only (official presets remain in the package)
 if [[ -f "$HOME/.config/klassy/klassyrc" ]]; then
   sed '/^LookAndFeelSet=/d' "$HOME/.config/klassy/klassyrc" > "$ROOT/klassy/klassyrc"
 fi
 
-# Panel Colorizer: presets e configurações
+# Panel Colorizer: presets and configurations
 if [[ -d "$HOME/.config/panel-colorizer" ]]; then
   mkdir -p "$ROOT/panel-colorizer"
   rsync -a --delete "$HOME/.config/panel-colorizer/" "$ROOT/panel-colorizer/" || true
 fi
 
-echo "Repo atualizado a partir do sistema: $ROOT"
-
+echo "Repository updated from the system: $ROOT"
