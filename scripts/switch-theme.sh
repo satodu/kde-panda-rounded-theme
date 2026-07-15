@@ -92,9 +92,14 @@ apply_mode() {
 
   echo "Switching to Panda Rounded ($target)…"
 
-  need_cmd plasma-apply-lookandfeel
-  plasma-apply-lookandfeel -a "$lookandfeel"
-  echo "→ Global theme: $lookandfeel"
+  # Apply configurations without using plasma-apply-lookandfeel (which resets desktop widgets/layout)
+  kwriteconfig6 --file kdeglobals --group KDE --key LookAndFeelPackage "$lookandfeel" || true
+  kwriteconfig6 --file kdeglobals --group KDE --key widgetStyle "kvantum" || true
+  kwriteconfig6 --file kcminputrc --group Mouse --key cursorTheme "breeze_cursors" || true
+  kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 --key library "org.kde.klassy" || true
+  kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 --key theme "Klassy" || true
+  qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || qdbus org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
+  echo "→ Global theme: $lookandfeel (layout preserved)"
 
   if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
     plasma-apply-colorscheme "$colors" >/dev/null || true
