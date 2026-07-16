@@ -16,6 +16,8 @@ PLASMA_LIGHT="Panda-theme-light"
 ICONS_DARK="Reversal-purple-dark"
 ICONS_LIGHT="Reversal-purple"
 ICONS_FALLBACK="Reversal-purple"
+KONSOLE_DARK="Panda.profile"
+KONSOLE_LIGHT="Panda Light.profile"
 
 need_cmd() {
   command -v "$1" >/dev/null 2>&1 || {
@@ -74,7 +76,7 @@ apply_icons() {
 
 apply_mode() {
   local target="$1"
-  local lookandfeel kvantum colors plasma icons
+  local lookandfeel kvantum colors plasma icons konsole
 
   if [[ "$target" == light ]]; then
     lookandfeel="$LOOKANDFEEL_LIGHT"
@@ -82,12 +84,14 @@ apply_mode() {
     colors="$COLORS_LIGHT"
     plasma="$PLASMA_LIGHT"
     icons="$ICONS_LIGHT"
+    konsole="$KONSOLE_LIGHT"
   else
     lookandfeel="$LOOKANDFEEL_DARK"
     kvantum="$KVANTUM_DARK"
     colors="$COLORS_DARK"
     plasma="$PLASMA_DARK"
     icons="$ICONS_DARK"
+    konsole="$KONSOLE_DARK"
   fi
 
   echo "Switching to Panda Rounded ($target)…"
@@ -98,8 +102,10 @@ apply_mode() {
   kwriteconfig6 --file kcminputrc --group Mouse --key cursorTheme "breeze_cursors" || true
   kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 --key library "org.kde.klassy" || true
   kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 --key theme "Klassy" || true
+  kwriteconfig6 --file konsolerc --group "Desktop Entry" --key DefaultProfile "$konsole" || true
   qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || qdbus org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
   echo "→ Global theme: $lookandfeel (layout preserved)"
+  echo "→ Konsole profile: $konsole"
 
   if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
     plasma-apply-colorscheme "$colors" >/dev/null || true
@@ -119,13 +125,16 @@ apply_mode() {
   echo "→ Clearing Plasma theme cache..."
   rm -f "$HOME/.cache/plasma-theme-"* "$HOME/.cache/plasma_theme_"* 2>/dev/null || true
 
-  echo "→ Restarting plasmashell..."
+  echo "→ Restarting plasmashell to update context menus..."
   if systemctl --user is-active plasma-plasmashell.service >/dev/null 2>&1; then
     systemctl --user restart plasma-plasmashell.service
   else
     kquitapp6 plasmashell 2>/dev/null || killall plasmashell 2>/dev/null || true
+    sleep 1
     kstart6 plasmashell >/dev/null 2>&1 &
   fi
+
+
 
   echo "Done. Open apps may need a restart to fully pick up Kvantum."
 }

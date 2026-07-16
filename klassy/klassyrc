@@ -46,6 +46,19 @@ HideTitleBar=0
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
+[Windeco Exception 2]
+BorderSize=8
+Enabled=true
+ExceptionBorder=true
+ExceptionMatchTitleBarToApplicationColor=false
+ExceptionPreset=
+ExceptionProgramNamePattern=
+ExceptionWindowPropertyPattern=systemsettings
+ExceptionWindowPropertyType=0
+HideTitleBar=0
+OpaqueTitleBar=false
+PreventApplyOpacityToHeader=false
+
 [WindowOutlineStyle]
 WindowOutlineOverlap=false
 WindowOutlineSnapToWholePixel=false

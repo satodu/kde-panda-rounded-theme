@@ -30,4 +30,12 @@ if [[ -d "$HOME/.config/panel-colorizer" ]]; then
   rsync -a --delete "$HOME/.config/panel-colorizer/" "$ROOT/panel-colorizer/" || true
 fi
 
+# Konsole: profiles and color schemes
+mkdir -p "$ROOT/konsole"
+cp "$HOME/.local/share/konsole/Panda.profile" "$ROOT/konsole/" 2>/dev/null || true
+cp "$HOME/.local/share/konsole/Panda Light.profile" "$ROOT/konsole/" 2>/dev/null || true
+cp "$HOME/.local/share/konsole/Moe.colorscheme" "$ROOT/konsole/" 2>/dev/null || true
+cp "$HOME/.local/share/konsole/Nordic.colorscheme" "$ROOT/konsole/" 2>/dev/null || true
+
+
 echo "Repository updated from the system: $ROOT"

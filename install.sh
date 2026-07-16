@@ -65,6 +65,35 @@ install_panel_colorizer() {
   fi
 }
 
+install_konsole() {
+  if [[ -d "$ROOT/konsole" ]]; then
+    echo "→ Konsole (profiles and color schemes)"
+    mkdir -p "$HOME/.local/share/konsole"
+    cp -r "$ROOT/konsole/"* "$HOME/.local/share/konsole/"
+  fi
+}
+
+install_reversal_icons() {
+  echo "→ Reversal Icon Theme"
+  # Check if a few representative color variations are installed to ensure the user has the full theme package
+  if ([[ -d "$HOME/.local/share/icons/Reversal-purple" ]] || [[ -d "$HOME/.icons/Reversal-purple" ]] || [[ -d "/usr/share/icons/Reversal-purple" ]]) \
+     && ([[ -d "$HOME/.local/share/icons/Reversal-blue" ]] || [[ -d "$HOME/.icons/Reversal-blue" ]] || [[ -d "/usr/share/icons/Reversal-blue" ]]) \
+     && ([[ -d "$HOME/.local/share/icons/Reversal-red" ]] || [[ -d "$HOME/.icons/Reversal-red" ]] || [[ -d "/usr/share/icons/Reversal-red" ]]); then
+    echo "  ✓ Reversal icon theme (all colors) is already installed."
+    return 0
+  fi
+
+  echo "  Reversal color variations missing. Downloading and installing all color variations..."
+  local temp_dir
+  temp_dir=$(mktemp -d)
+  if git clone --depth 1 https://github.com/yeyushengfan258/Reversal-icon-theme.git "$temp_dir"; then
+    "$temp_dir/install.sh" -t all
+  else
+    echo "  ⚠ Failed to clone Reversal icon theme repository. Skipping icon installation."
+  fi
+  rm -rf "$temp_dir"
+}
+
 set_kvantum() {
   local theme="$1"
   mkdir -p "$HOME/.config/Kvantum"
@@ -77,12 +106,16 @@ case "$MODE" in
     install_dark
     install_klassy
     install_panel_colorizer
+    install_konsole
+    install_reversal_icons
     set_kvantum Panda
     ;;
   light)
     install_light
     install_klassy
     install_panel_colorizer
+    install_konsole
+    install_reversal_icons
     set_kvantum PandaLight
     ;;
   both)
@@ -90,6 +123,8 @@ case "$MODE" in
     install_light
     install_klassy
     install_panel_colorizer
+    install_konsole
+    install_reversal_icons
     set_kvantum Panda
     ;;
   *)
@@ -102,13 +137,16 @@ echo
 echo "→ Clearing Plasma theme cache..."
 rm -f "$HOME/.cache/plasma-theme-"* "$HOME/.cache/plasma_theme_"* 2>/dev/null || true
 
-echo "→ Restarting plasmashell..."
+echo "→ Restarting plasmashell to update context menus..."
 if systemctl --user is-active plasma-plasmashell.service >/dev/null 2>&1; then
   systemctl --user restart plasma-plasmashell.service
 else
   kquitapp6 plasmashell 2>/dev/null || killall plasmashell 2>/dev/null || true
+  sleep 1
   kstart6 plasmashell >/dev/null 2>&1 &
 fi
+
+
 
 echo
 echo "Done. Next manual steps:"
